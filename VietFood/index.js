@@ -33,13 +33,13 @@ Array.from(categories).forEach((item, index) => {
         let currCat = foodCategory.querySelector('button.active')
         currCat.classList.remove('active')
         e.target.classList.add('active')
-        foodMenuList.classList ='food-item-wrap '+ e.target.getAttribute('data-food-type')
+        foodMenuList.classList = 'food-item-wrap ' + e.target.getAttribute('data-food-type')
     }
 })
 
 // on scroll animation
 
-let scroll = window.requestAnimationFrame || function(callback) {window.setTimeout(callback, 1000/60)}
+let scroll = window.requestAnimationFrame || function(callback) { window.setTimeout(callback, 1000 / 60) }
 
 let elToShow = document.querySelectorAll('.play-on-scroll')
 
@@ -47,10 +47,8 @@ isElInViewPort = (el) => {
     let rect = el.getBoundingClientRect()
 
     return (
-        (rect.top <= 0 && rect.bottom >= 0)
-        ||
-        (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) && rect.top <= (window.innerHeight || document.documentElement.clientHeight))
-        ||
+        (rect.top <= 0 && rect.bottom >= 0) ||
+        (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) && rect.top <= (window.innerHeight || document.documentElement.clientHeight)) ||
         (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
     )
 }
@@ -85,19 +83,35 @@ bottomNavItems.forEach((item, index) => {
     }
 })
 
+
+// 
+const array = [{ name: "Bánh cấy", description: "chao cac ban day la banh cay" },
+    { name: "Bánh đậu xanh", description: "chao cac ban day la banh dau xanh" },
+    { name: "Chả cá Lã Vọng", description: "chao cac ban day la cha ca la vong" },
+    { name: "Bún cá", description: "chao cac ban day la bun ca" }
+];
+
 $(".modal").hide();
-$(".item-wrap").click({param:$(".item-wrap")}, function(event) {
+
+$(".item-wrap").click({ param: $(".item-wrap") }, function(event) {
     $(".modal").show();
     var str = $(this).find('.item__name').text();
-    var image =  $(this).find('.bg-img').css('background-image');
-    image= image.slice(5, image.length-2);
-    var description;
+    var image = $(this).find('.bg-img').css('background-image');
+    image = image.slice(5, image.length - 2);
+    // var description = $this.find('.item__des').text();
+    for (let i = 0; i < array.length; i++) {
+        if (str == array[i].name) {
+            $('.modal__description').html(array[i].description);
+            break;
+        }
+    }
+
     $(".item__name--modal").html(str);
     $('.modal__body--img').attr('src', image);
 })
-$(".modal__header>i").click({param:$(".modal__header>i")}, function() {
+$(".modal__header>i").click({ param: $(".modal__header>i") }, function() {
     $(".modal").hide();
 })
-$(".modal__close").click({param:$(".modal__close")}, function() {
+$(".modal__close").click({ param: $(".modal__close") }, function() {
     $(".modal").hide();
 })
