@@ -98,16 +98,11 @@ $(".item-wrap").click({ param: $(".item-wrap") }, function(event) {
     var str = $(this).find('.item__name').text();
     var image = $(this).find('.bg-img').css('background-image');
     image = image.slice(5, image.length - 2);
-    // var description = $this.find('.item__des').text();
-    for (let i = 0; i < array.length; i++) {
-        if (str == array[i].name) {
-            $('.modal__description').html(array[i].description);
-            break;
-        }
-    }
+    var description = $(this).find('.description').html();
 
     $(".item__name--modal").html(str);
     $('.modal__body--img').attr('src', image);
+    $('.item__desc--modal').html(description);
 })
 $(".modal__header>i").click({ param: $(".modal__header>i") }, function() {
     $(".modal").hide();
